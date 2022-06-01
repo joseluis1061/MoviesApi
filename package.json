@@ -1,0 +1,27 @@
+{
+  "name": "moviesapi",
+  "version": "1.0.0",
+  "description": "Api Rest movies",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joseluis1061/MoviesApi.git"
+  },
+  "keywords": [
+    "Java",
+    "Script",
+    "html",
+    "css",
+    "api",
+    "rest"
+  ],
+  "author": "JOSE LUIS ZUÑIGA <joseluis836@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joseluis1061/MoviesApi/issues"
+  },
+  "homepage": "https://github.com/joseluis1061/MoviesApi#readme"
+}
