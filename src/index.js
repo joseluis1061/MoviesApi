@@ -1,13 +1,22 @@
-const URL_API = 'https://api.themoviedb.org/3/';
-const trending = 'trending/movie/day?api_key='+Api_key;
-const genre = '/genre/movie/list?api_key='+Api_key;
+const trending = 'trending/movie/day?';
+const genre = 'genre/movie/list?';
+
+const api = axios.create({
+    baseURL: 'https://api.themoviedb.org/3/',
+    headers:{
+        'Content-type': 'aplication/json;charset=utf-8'
+    },
+    params:{
+        'api_key': Api_key,
+    }
+  });
 
 
 const URL_IMG = 'https://image.tmdb.org/t/p/w300';
 
-async function getTrendingMoviesPreview(URL_API){
-    const res = await fetch(URL_API);
-    const data = await res.json();
+async function getTrendingMoviesPreview(){
+    const {data} = await api(trending);
+    //const data = await res.json();
     const movies = data.results;
     //console.log(movies)
     
@@ -27,14 +36,12 @@ async function getTrendingMoviesPreview(URL_API){
     const trendingPreviewMovieList = document.querySelector('#trendingPreview .trendingPreview-movieList');
     trendingPreviewMovieList.append(...nodosMovies);
 }
-getTrendingMoviesPreview(URL_API+trending)
+getTrendingMoviesPreview()
 
 
-async function getCategoriesPreview(URL_API){
-    const res = await fetch(URL_API);
-    const data = await res.json();
-    const categorys = data.genres;
-    //console.log({data, categorys})
+async function getCategoriesPreview(){
+    const {data} = await api(genre);
+    const categorys = data.genres; 
 
     const nodeGenrest = categorys.map(genre =>{
         const divCategoryContainer = document.createElement('DIV');
@@ -43,7 +50,6 @@ async function getCategoriesPreview(URL_API){
         const categoryTitle = document.createElement('h3');
         categoryTitle.className = 'category-title';
         categoryTitle.setAttribute('id','id'+genre.id);
-        // document.createTextNode = genre.name;
         categoryTitle.textContent = genre.name;
 
         divCategoryContainer.appendChild(categoryTitle);
@@ -54,4 +60,4 @@ async function getCategoriesPreview(URL_API){
 
     categoriesPreviewList.append(...nodeGenrest);
 }
-getCategoriesPreview(URL_API+genre)
+getCategoriesPreview()
