@@ -36,8 +36,6 @@ async function getTrendingMoviesPreview(){
     const trendingPreviewMovieList = document.querySelector('#trendingPreview .trendingPreview-movieList');
     trendingPreviewMovieList.append(...nodosMovies);
 }
-////
-
 
 async function getCategoriesPreview(){
     const {data} = await api(genre);
