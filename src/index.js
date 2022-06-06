@@ -3,8 +3,10 @@ const trending = 'trending/movie/day?';
 const genre = 'genre/movie/list?';
 const movieGenres = 'discover/movie';
 const searchMovie = 'search/movie';
+const movieById = 'movie/'
 
 const URL_IMG = 'https://image.tmdb.org/t/p/w300';
+const URL_IMG500 = 'https://image.tmdb.org/t/p/w500';
 
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
@@ -19,7 +21,6 @@ const api = axios.create({
 //Utils
 function createMovies(movies, container){
     container.innerHTML = '';
-
     const nodosMovies = movies.map(movie => {
         const divMovieContainer = document.createElement('DIV');
         divMovieContainer.className = 'movie-container';
@@ -29,6 +30,10 @@ function createMovies(movies, container){
         imgMovieContainer.setAttribute('alt', 'original_title');
         imgMovieContainer.setAttribute('src',  URL_IMG+movie.poster_path);
         divMovieContainer.appendChild(imgMovieContainer);    
+
+        divMovieContainer.addEventListener('click', ()=>{
+            location.hash = 'movie='+movie.id;
+        });
         return divMovieContainer;
     });    
     container.append(...nodosMovies);
@@ -90,4 +95,24 @@ async function getMoviesBySearch(query){
     });
     const movies = data.results;
     createMovies(movies, genericSection);
+}
+
+async function getMovieById(id){
+    const {data: movie} = await api(movieById+id);
+
+    const movieImgUrl =  URL_IMG500+movie.poster_path;
+    headerSection.style.background = `
+    linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.35) 19.27%, 
+        rgba(0, 0, 0, 0) 29.17%
+    ),
+    url(${movieImgUrl})
+    `;    
+
+    movieDetailTitle.textContent = movie.tittle;
+    movieDetailDescription.textContent = movie.overview;
+    movieDetailScore.textContent = movie.vote_average;
+
+    createCategories(movie.genres, movieDetailCategoriesList);
 }

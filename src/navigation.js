@@ -86,7 +86,13 @@ function movieDetailsPage() {
     movieDetailSection.classList.remove('inactive');
 
     document.body.scrollTop = 0;
-    document.docuementElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+
+    //[search, searchValue]
+    const [_, movieId] = location.hash.split('=');
+    if(movieId){
+        getMovieById(movieId);
+    }
 }
 
 function searchPage() {
