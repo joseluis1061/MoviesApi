@@ -97,6 +97,13 @@ async function getMoviesBySearch(query){
     createMovies(movies, genericSection);
 }
 
+async function getTrendingMovies() {
+    const { data } = await api('trending/movie/day');
+    const movies = data.results;
+
+    createMovies(movies, genericSection);
+}
+
 async function getMovieById(id){
     const {data: movie} = await api(movieById+id);
 
@@ -115,4 +122,18 @@ async function getMovieById(id){
     movieDetailScore.textContent = movie.vote_average;
 
     createCategories(movie.genres, movieDetailCategoriesList);
+
+    //Agregar peliculas relacionadas
+    getRelatedMoviesId(id);
+}
+
+
+//Agregar peliculas relacionadas/recomendadas
+async function getRelatedMoviesId(id){
+    console.log(movieById+id+'/recomendations')
+    const {data} = await api(movieById+id+'/recommendations');
+
+    const relatedMovies = data.results;
+
+    createMovies(relatedMovies, relatedMoviesContainer);
 }

@@ -73,7 +73,6 @@ function movieDetailsPage() {
     console.log('Movie!!');
 
     headerSection.classList.add('header-container--long');
-    // headerSection.style.background = '';
     arrowBtn.classList.remove('inactive');
     arrowBtn.classList.add('header-arrow--white');
     headerTitle.classList.add('inactive');
@@ -120,6 +119,8 @@ function searchPage() {
     }
 }
 
+
+
 function trendsPage() {
     console.log('TRENDS!!');
 
@@ -136,8 +137,12 @@ function trendsPage() {
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
 
+    headerCategoryTitle.innerHTML = 'Tendencias';
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+
+    getTrendingMovies();
 }
+
 
 
