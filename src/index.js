@@ -8,7 +8,7 @@ const movieById = 'movie/'
 const URL_IMG = 'https://image.tmdb.org/t/p/w300';
 const URL_IMG500 = 'https://image.tmdb.org/t/p/w500';
 
-const process.env.Api_key
+const Api_key = process.env.Api_key
 
 
 const api = axios.create({
